@@ -35,21 +35,36 @@ Cartpole|$455.15 \pm 51.15$|$500.00$|~2 h 30 min
 Pendulum|$-179.97 \pm 105.88$|$-1.67$|~2 h 30 min
 
 ## Car Racing (Image observations, Continuous actions)
+
+While **NaturalDreamer** started getting good results in the Car Racing environment after around 15 thousand gradient steps, **TrustworthyDreamer** achieves it in under 10 thousand gradient steps.
+
+In the gif shown below, we can see a real interaction with the environment, together with the imagination of an entire episode without ground-truth.
+
 ![Dreamer playing Car Racing](images/dreamer_side_by_side_carracing.gif)
 
 ![Dreamer scores Car Racing](images/dreamer_carracing_scores.jpg)
 
 ## Pong (Image observations, Discrete actions)
+
+Without changing any hyperparameters, the next environment that was tested was Pong, which contains a discrete action space. As we can see in the gif below, while in reality the agent wins with a perfect score (0-21), the agent imagines an entire episode where it wins by 2-21.
+
 ![Dreamer playing Pong](images/dreamer_side_by_side_pong.gif)
+
+*If you notice, the real screen in Pong never shows the number 21 (because scoring it makes the episode terminate), but the agent is able to understand the score pattern and can imagine it appearing on screen. If we keep imagining, the score keeps increasing.*
 
 ![Dreamer scores Pong](images/dreamer_pong_scores.jpg)
 
 ## Pendulum (Vector observations, Continuous actions)
 ![Dreamer playing Pendulum](images/dreamer_play_pendulum.gif)
 
+Since the agent does not imagine images (but rather vectors), in the gif below we show a comparison between the real vector and the imagined vector on an episode. The same hyperparameters were used as the previous environments.
+
 ![Dreamer scores Pendulum](/images/dreamer_pendulum_scores.jpg)
 
 ## Cartpole (Vector observations, Discrete actions)
+
+Since vector observations contain much more useful information than images, we usually increase the replay ratio (number of gradient steps after one interaction with the environment), resulting in less real interactions. For the Cartpole environment, the replay ratio was increased from 32 to 256 (also used in the original paper). Additionally, the length of the trajectories sampled for training was decreased from 64 to 10, since at the start of training, episodes are very short.
+
 ![Dreamer playing Cartpole](images/dreamer_play_cartpole3.gif)
 
 ![Dreamer scores Cartpole](/images/dreamer_cartpole_scores.jpg)
