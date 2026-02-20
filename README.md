@@ -29,10 +29,10 @@ LaProp Optimizer|Although the Adam optimizer works perfectly fine for most envir
 
 Environment|Mean Score|Max Score|Training Time
 -|-|-|-
-Car Racing|$817.02 \pm 195.34$|$938.10$|$9$ h
-Pong|$18.85 \pm 1.97 $|$21$|$14$ h
-Cartpole|$455.15 \pm 51.15$|$500.00$|~$2$ h $30$ min
-Pendulum|$-179.97 \pm 105.88$|$-1.67$|~$2$ h $30$ min
+Car Racing|$817.02 \pm 195.34$|$938.10$|~9 h
+Pong|$18.85 \pm 1.97 $|$21$|~14 h
+Cartpole|$455.15 \pm 51.15$|$500.00$|~2 h 30 min
+Pendulum|$-179.97 \pm 105.88$|$-1.67$|~2 h 30 min
 
 ## Car Racing (Image observations, Continuous actions)
 ![Dreamer playing Car Racing](images/dreamer_side_by_side_carracing.gif)
