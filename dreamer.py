@@ -100,6 +100,10 @@ class Dreamer:
 
     @torch.no_grad()
     def play(self, env, seed=None, file_name = 'dreamer_play.gif', deterministic = False):
+        """
+        Play one episode and save the episode as a gif. If deterministic = True, the actions are deterministic (not samples).
+        """
+
         obs, _ = env.reset(seed=seed)
 
         deter = torch.zeros(1, self.deter_dim, device=self.device)
@@ -190,6 +194,9 @@ class Dreamer:
 
     @torch.no_grad()
     def _env_interaction(self, env, seed = None, episodes = 1, writer = None, eval = False):
+        """
+        Interact with the environment for some episodes. This function returns the mean score of those episodes.
+        """
         total_score = 0
         for _ in range(episodes):
             deter = torch.zeros(1, self.deter_dim, device=self.device)
@@ -239,7 +246,6 @@ class Dreamer:
                 print(f'Episode {self.total_episodes}: {score}')
                 if writer is not None:
                     writer.add_scalars("score", {'score': score}, self.total_episodes)
-                # print(len(experiences['observations']))
                 # add experience to memory (only if there are enough experiences to create trajectories for training)
                 if len(experiences['observations']) >= self.batch_length:
                     experiences = {k: torch.stack(v) for k, v in experiences.items()}
@@ -282,16 +288,13 @@ class Dreamer:
         S = self.stoch
         C = self.classes
 
-        # B, T, D = batches['deters'].shape
-        # B, T, S, C = batches['stochs'].shape
-
         # encode observations (images or vectors) into embeddings
         tokens = self.enc(batches['observations'])  # [B, emb_dim]
         # get first state of each trajectory
         prev_deter = batches['deters'][:, 0]        # [B, deter_dim]
         prev_stoch = batches['stochs'][:, 0]        # [B, stoch, classes]
 
-        # compute trajectory starting from first state
+        # compute trajectory starting from first state (and taking the same actions)
         deters = torch.empty(B, T, D, device=self.device)               # [B, T, deter_dim]
         stochs = torch.empty(B, T, S, C, device=self.device)            # [B, T, stoch, classes]
         post_logits = torch.empty(B, T, S, C, device=self.device)       # [B, T, stoch, classes]
