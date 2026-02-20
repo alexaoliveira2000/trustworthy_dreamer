@@ -1,6 +1,6 @@
 # TrustworthyDreamer
 
-Tested and easy-to-read version of DreamerV3, 100% in PyTorch. This README also includes a detailed explanation of the algorithm, assuming you only know basic concepts of RL.
+<!-- Tested and easy-to-read version of DreamerV3, 100% in PyTorch. This README also includes a detailed explanation of the algorithm, assuming you only know basic concepts of RL. -->
 
 DreamerV3 is a state-of-the-art model based RL algorithm that uses **experiences** to train a **world model**, and uses the **world model** to learn a **policy**. In other words, it uses real interactions to learn the dynamics of the world, and then imagines the dynamics of the world to learn what to do. However, both the original paper and code are [extremely hard to read](https://www.reddit.com/r/reinforcementlearning/comments/1azgrc4/dreamerv3_code_is_so_hard_to_read/), as pointed out by several people, even for those already familiar with model-free RL.
 
